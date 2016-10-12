@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>购酒网首页</title>
+		<script src="js/jquery-1.12.0.js"></script>
+		<script src="js/lbt/jquery.xcarousel.js"></script>
+		<script src="js/xlbt/jquery.xlbt.js"></script>
+
+		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<link href="css/index.css" rel="stylesheet" type="text/css" />
+		<link href="css/jquery.xcarousel.css" rel="stylesheet" type="text/css" />
+		<link href="css/jquery.xlbt.css" rel="stylesheet" type="text/css" />
+
+		<script>
+			$(function() {
+
+				$('.lbt').xcarousel({
+					// page:false,
+					autoPlay: true,
+					buttons: false,
+					type: 'x'
+
+				});
+
+				//		小轮播图
+				$('.one-ul').lcarousel({
+					// page:false,
+					autoPlay: true,
+					buttons: true,
+					type: 'x'
+
+				});
+
+				//				.anim  鼠标进入li事件
+				$('.anim-ul').on('mouseenter', 'li', function() {
+					$(this).find('img').animate({
+						left: 42
+					});
+					console.log("ssssssss");
+
+				});
+				$(".anim-ul").on('mouseleave', 'li', function() {
+					$(this).find('img').animate({
+						left: 58
+					});
+
+				});
+
+				//			 首页最底部左右移动效果部分
+				var $ulb = $('.move-lr ul');
+				$ulb.on('mouseenter', 'li', function() {
+					$(this).find('img').animate({
+						left: -130
+					});
+					//console.log("1111111111111");
+
+				});
+				$ulb.on('mouseleave', 'li', function() {
+					$(this).find('img').animate({
+						left: 0
+					});
+
+				});
+
+				//			吸顶菜单部分
+				var ocurrent = $(".xiding").offset().top;
+				$(".xiding").css({
+					"display": "none"
+				}); //默认状态	   
+				$(window).scroll(function() {
+
+					var scrolltop = $(document).scrollTop(); //返回的是滚动条距离顶部的位置
+
+					if(scrolltop >= ocurrent) {
+
+						$(".xiding").css({
+							"position": "fixed",
+							"top": 0,
+							'display': 'block'
+						}); //让它固定到顶部
+						$(".xiding").fadeIn(); //淡入
+					} else {
+						$(".xiding").fadeOut(); //淡出
+						$(".xiding").css({
+							"display": "none"
+						}); //默认状态
+
+					}
+
+				});
+				//			       楼梯部分
+				var $nav = $("#LoutiNav");
+				var $floor = $(".floor-one");
+
+				//1.给window添加滚动事件
+				$(window).scroll(function() {
+
+					var scrollTop = $(window).scrollTop();
+
+					if(scrollTop >= 500) {
+						$nav.fadeIn();
+					} else {
+						$nav.fadeOut();
+					}
+
+					//console.log($floor);
+					//目的 主要是来找index
+					$floor.each(function(idx, ele) {
+						if(scrollTop >= $(ele).offset().top && scrollTop <= $(ele).offset().top + $(ele).outerHeight() / 2) {
+							//console.log(idx);
+							$nav.find("li").removeClass("hover").eq(idx).addClass("hover");
+							return false; //找到了对应的li后就停止遍历
+						}
+
+					});
+
+				});
+
+				//2.给导航添加点击事件
+
+				$nav.on("click", "li", function() {
+					//top
+					if($(this).hasClass("last")) {
+						$("html,body").animate({
+							scrollTop: 0
+						}); //点击回到顶部
+					}
+
+					var index = $(this).index(); //保存索引值
+					var _scrollTop = $floor.eq(index).offset().top;
+					$("html,body").animate({
+						scrollTop: _scrollTop
+					}); //点击哪个就到哪个的位置
+
+				});
+
+				//				3.点击右边固定的返回顶部即返回
+				var $back = $('.one');
+
+				$back.on("click", function() {
+					//top
+
+					$("html,body").animate({
+						scrollTop: 0
+					}); //点击回到顶部
+
+				});
+
+				//			最右边固定部分鼠标划过效果	
+				var $right_ul = $('.right-content');
+				$right_ul.on('mouseenter', 'li', function() {
+					$(this).find('span').removeClass('hover').addClass('hover').animate({
+						right: 30
+					});
+
+				})
+				$right_ul.on('mouseleave', 'li', function() {
+					$(this).find('span').removeClass('hover');
+
+				})
+
+			});
+
+			//倒计时部分
+
+			var count = {
+				// 设置时间
+				initHour: 10,
+				initMin: 40,
+				initSec: 60,
+				countTime: function() {
+					var sec1 = document.getElementById("secs1");
+					var min1 = document.getElementById("mins1");
+					var hour1 = document.getElementById("hours1");
+
+					var sec2 = document.getElementById("secs2");
+					var min2 = document.getElementById("mins2");
+					var hour2 = document.getElementById("hours2");
+
+					var sec3 = document.getElementById("secs3");
+					var min3 = document.getElementById("mins3");
+					var hour3 = document.getElementById("hours3");
+
+					var sec4 = document.getElementById("secs4");
+					var min4 = document.getElementById("mins4");
+					var hour4 = document.getElementById("hours4");
+
+					var sec5 = document.getElementById("secs5");
+					var min5 = document.getElementById("mins5");
+					var hour5 = document.getElementById("hours5");
+
+					var secs = this.initSec;
+					var mins = this.initMin;
+					var hours = this.initHour;
+
+					var timer = setInterval(move, 1000);
+
+					function move() {
+						secs--;
+						if(secs < 0) {
+							secs = 60;
+							mins--;
+							if(mins1 < 0) {
+								hours--;
+								mins1 = 60;
+								secs = 60;
+								if(hours < 1) {
+									mins = 0;
+									secs = 0;
+									clearInterval(timer);
+								}
+							}
+						}
+						sec1.innerHTML = secs;
+						min1.innerHTML = mins;
+						hour1.innerHTML = hours;
+
+						sec2.innerHTML = secs;
+						min2.innerHTML = mins;
+						hour2.innerHTML = hours;
+
+						sec3.innerHTML = secs;
+						min3.innerHTML = mins;
+						hour3.innerHTML = hours;
+
+						sec4.innerHTML = secs;
+						min4.innerHTML = mins;
+						hour4.innerHTML = hours;
+
+						sec5.innerHTML = secs;
+						min5.innerHTML = mins;
+						hour5.innerHTML = hours;
+
+					}
+				}
+			}
+			window.onload = function() {
+				count.countTime();
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="box">
+			<!--------------------------------楼梯效果部分------------------------->
+			<div id="LoutiNav">
+				<ul>
+					<li class="hover">1F <span>葡萄酒馆</span> </li>
+					<li>2F <span>高端收藏</span> </li>
+					<li>3F <span>高端收藏</span> </li>
+					<li>4F <span>高端收藏</span> </li>
+					<li>5F <span>高端收藏</span> </li>
+					<li>6F <span>品牌推荐</span> </li>
+					<li class="last">&and;</li>
+				</ul>
+			</div>
+
+			<!------------------------吸顶菜单-------------------------->
+			<div class="xiding">
+				<img src="img/top/xd1.jpg" />
+				<div class="sc"><input class="search" type="text" placeholder="&nbsp;请输入搜索关键词" /><span>搜索</span></div>
+
+			</div>
+
+			<div class="top">
+				<div class="focus">
+					<p><img src="" />关注购酒网<img src="img/top/p1-1.jpg" /><span></span></p>
+				</div>
+				<ul class="regin">
+					<li>Hi,请
+						<a href="html/regin.html ">登陆/</a>
+						<a href="html/login.html">注册</a>&nbsp;&nbsp;|</li>
+					<li>我的订单&nbsp;&nbsp;|</li>
+					<li>用户中心&nbsp;&nbsp;|<span></span></li>
+					<li>在线客服&nbsp;&nbsp;|</li>
+					<li>帮助&nbsp;&nbsp;|</li>
+					<li class="comment">提意见&nbsp;&nbsp;|</li>
+					<li class="cell"><img src="img/top/p1.jpg" />400-722-1919</li>
+
+				</ul>
+
+			</div>
+			<div class="top-little">
+
+				<div class="top-content">
+					<img src="img/top/p2.jpg" /> 购酒网68元抢超值福利福袋，好礼享不停 <span class="top-close"> 关闭 </span>
+
+				</div>
+
+			</div>
+			<!-- 最右边，固定位置部分    -->
+			<div class="right">
+				<ul class="right-content">
+					<li> <img src="img/top/p3.jpg" /><span>会员中心</span></li>
+					<li class="right-car">
+						<a href="   "><img src="img/top/p4.jpg" />购物车</a>
+					</li>
+					<li class="ticket">券<span>我的优惠券</span></li>
+					<li><img src="img/top/p5.jpg" /><span>我的收藏</span></li>
+					<li><img src="img/top/p6.jpg" /><span>我的收藏</span></li>
+					<li><img src="img/top/p7.jpg" /><span>好货推荐</span></li>
+					<li><img src="img/top/p8.jpg" /><span>在线客服</span></li>
+					<li class="second"><img src="img/top/p9.jpg" /><span>用户反馈</span></li>
+					<li class="one"><img src="img/top/p10.jpg" /><span>返回顶部</span></li>
+				</ul>
+
+			</div>
+
+			<!-----------------导航部分------------------>
+			<div class="nav">
+				<img class="logo" src="img/top/logo.jpg" />
+				<img class="bag" src="img/top/fd.gif" />
+				<div class="sc"><input class="search" type="text" /><span>搜索</span></div>
+				<div class="mycar"><img src="img/top/car.jpg" />我的购物车&gt;<span>0</span></div>
+				<ul class="list">
+					<li>茅台</li>
+					<li>郎酒</li>
+					<li>五粮液</li>
+					<li>剑南春</li>
+					<li>泸州老窖</li>
+					<li>洋河</li>
+
+				</ul>
+
+			</div>
+
+			<div class="content">
+				<div> </div>
+				<ul class='content-list'>
+					<li class="red">
+						<a href=""> 首页 </a>
+					</li>
+					<li>
+						<a href="html/lazyload.html">特卖会</a>
+					</li>
+					<li>
+						<a href="">进口馆</a>
+					</li>
+					<li>
+						<a href="">陈年老酒</a>
+					</li>
+					<li>
+						<a href="">醉爱小酒版</a>
+					</li>
+					<li>
+						<a href="">高端收藏酒</a>
+					</li>
+
+				</ul>
+				<img class="specile" src="img/top/sp.gif" />
+
+			</div>
+
+			<!-------------------红色商品分类部分------------------>
+
+			<div class="allgoods">
+				<div> </div>
+				<h4>全部商品分类</h4>
+
+				<h5 class="first">购酒直通车<img src="img/top/tmh1.jpg"/></h5><br />
+				<ul class="goodslist-1">
+					<li>大坛美酒</li>
+					<li class="white">高端收藏</li>
+					<li>送礼推荐</li>
+					<li>整箱促销</li>
+					<li>封顶49元</li>
+					<li>婚宴用酒</li>
+
+				</ul>
+
+				<ul class="goodslist-2">
+					<div> </div>
+					<li>白酒<span>&lt;</span></li>
+					<li class="white">茅台</li>
+					<li class="white">五粮液</li>
+					<li>郎酒</li>
+					<li>剑南春</li>
+					<li>国窖1573</li>
+					<li>泸州老窖</li>
+					<li class="white">年份老酒</li>
+
+				</ul>
+
+				<ul class="goodslist-3">
+					<div></div>
+					<li>葡萄酒<span>&lt;</span></li>
+					<li class="white">拉菲</li>
+					<li>黄尾袋鼠</li>
+					<li>奔富</li>
+					<li class="white">皇族雄狮</li>
+					<li>张裕</li>
+					<li>杰卡斯</li>
+
+				</ul>
+
+				<ul class="goodslist-4">
+					<div></div>
+					<li>洋酒<span>&lt;</span></li>
+					<li class="white">人头马</li>
+					<li>芝华士</li>
+					<li class="white">皇家路易</li>
+					<li>尊尼获加</li>
+					<li>格兰菲迪</li>
+					<li>百龄坛</li>
+
+				</ul>
+
+				<ul class="goodslist-5">
+					<div></div>
+					<li>黄酒</li>
+					<li>养生酒</li>
+					<li>啤酒<span>&lt;</span></li><br />
+					<li class="white">古越龙山</li>
+					<li>女儿红</li>
+					<li>唐宋</li>
+					<li>劲酒</li>
+					<li class="hh">竹叶青</li>
+					<li class="white">茶叶</li>
+					<li>酒具</li>
+					<li>新品</li>
+					<li>清仓专区</li>
+
+				</ul>
+
+			</div>
+			<img class="yb" src="img/top/more.png" />
+
+			<!------------
+        	大轮播图部分
+       ------------------ -->
+
+			<div class="lbt xcarousel">
+				<ul>
+					<li><img src="img/big/p2.jpg" alt="" /></li>
+					<li><img src="img/big/p1.jpg" alt="" /></li>
+					<li><img src="img/big/p3.jpg" alt="" /></li>
+					<li><img src="img/big/p4.jpg" alt="" /></li>
+					<li><img src="img/big/p5.jpg" alt="" /></li>
+					<li><img src="img/big/p6.jpg" alt="" /></li>
+
+				</ul>
+			</div>
+
+			<div class="third">
+				<ul class="third-list1">
+					<li><img src="img/big/p2-2.jpg" /></li>
+					<li><img src="img/top/p2-1.gif" /></li>
+					<li><img src="img/top/p2-1.gif" /></li>
+					<li><img src="img/top/p2-1.gif" /></li>
+					<li><img src="img/top/p2-1.gif" /></li>
+
+				</ul>
+
+				<dl class="third-list2">
+					<dt>
+      			<div  class="third-list2-left"><h4>购酒闪购&nbsp;|</h4><span>冰点特价&nbsp;数量有限</span></div>
+      			<div  class="third-list2-right"><h4>购酒快讯&nbsp;|</h4><span>更多</span></div>
+      		
+      		</dt>
+					<dd>
+						<img src="img/images/d1.JPG" />
+						<div class="txt">美国 加州乐事 私人珍藏清爽白葡萄酒 750ml</div>
+						<h2>￥9999</h2>
+						<div>剩余：<span id="day">01</span>天<span id="hours1">10</span>时 <span id="mins1">40
+      				
+      			</span>分<span id="secs1">60</span>秒</div>
+
+					</dd>
+					<dd>
+						<img src="img/images/d2.JPG" />
+						<div class="txt">美国 加州乐事 私人珍藏清爽白葡萄酒 750ml</div>
+						<h2>&yen;9999</h2>
+						<div>剩余：<span id="day">01</span>天<span id="hours2">10</span>时 <span id="mins2">40
+      				
+      			</span>分<span id="secs2">60</span>秒</div>
+
+					</dd>
+					<dd>
+						<img src="img/images/d3.JPG" />
+						<div class="txt">53度 茅台 飞天 二套装 500ml+50ml*4瓶</div>
+						<h2>&yen;9999</h2>
+						<div>剩余：<span id="day">01</span>天<span id="hours3">10</span>时 <span id="mins3">40
+      				
+      			</span>分<span id="secs3">60</span>秒</div>
+
+					</dd>
+					<dd>
+						<img src="img/images/d4.JPG" />
+						<div class="txt">53度茅台 建国60周年</div>
+						<h2>&yen;9999</h2>
+						<div>剩余：<span id="day">01</span>天<span id="hours4">10</span>时 <span id="mins4">40
+      				
+      			</span>分<span id="secs4">60</span>秒</div>
+
+					</dd>
+					<dd>
+						<img src="img/images/d5.JPG" />
+						<div class="txt">68度 五粮液 250ml</div>
+						<h2>&yen;9999</h2>
+						<div>剩余：<span id="day">01</span>天<span id="hours5">10</span>时 <span id="mins5">40
+      				
+      			</span>分<span id="secs5">60</span>秒</div>
+
+					</dd>
+
+					<dd class="ytp">
+						<ul>
+							<li>
+								<h5>[公告]</h5><span>购酒网68元抢超值福袋</span></li>
+							<li>
+								<h5>[公告]</h5><span>购酒网68元抢超值福袋</span></li>
+							<li>
+								<h5>[公告]</h5><span>购酒网68元抢超值福袋</span></li>
+							<li>
+								<h5>[公告]</h5><span>购酒网68元抢超值福袋</span></li>
+							<li>
+								<h5>[公告]</h5><span>购酒网68元抢超值福袋</span></li>
+							<li><img src="img/images/p2.jpg" /></li>
+
+						</ul>
+
+					</dd>
+
+				</dl>
+
+			</div>
+			<div class="tp">
+				<img src="img/images/p1.jpg" />
+
+			</div>
+
+			<!--
+       	左右动画效果
+       -->
+			<div class="anim-box">
+
+				<div class="divice">
+					<div class="divice-left"><span>购酒推荐&nbsp;|</span>
+						<h6>冰点特价&nbsp;限时特惠</h6></div>
+					<div class="divice-tp"><img src="img/images/p3.jpg" /> </div>
+
+				</div>
+
+				<div class="anim">
+					<ul class="anim-ul">
+						<li>
+							<h3>品牌美酒&nbsp;低价抢购 </h3>
+							<h5>52度五粮液股份公司1995专卖店 </h5><span class="anim-price">
+	       				
+	       		200元</span>
+							<div><img src="img/images/p4.jpg" /> </div>
+						</li>
+
+						<li>
+							<h3>品牌美酒&nbsp;低价抢购 </h3>
+							<h5>52度五粮液股份公司1995专卖店 </h5><span class="anim-price">
+	       				
+	       		200元</span><img src="img/images/p6.jpg" /> </li>
+
+						<li>
+							<h3>品牌美酒&nbsp;低价抢购 </h3>
+							<h5>52度五粮液股份公司1995专卖店 </h5><span class="anim-price">
+	       				
+	       		200元</span><img src="img/images/p5.jpg" /> </li>
+
+						<li>
+							<h3>品牌美酒&nbsp;低价抢购 </h3>
+							<h5>52度五粮液股份公司1995专卖店 </h5><span class="anim-price">
+	       				
+	       		200元</span><img src="img/images/p7.jpg" /> </li>
+
+						<li>
+							<h3>品牌美酒&nbsp;低价抢购 </h3>
+							<h5>52度五粮液股份公司1995专卖店 </h5><span class="anim-price">
+	       				
+	       		200元</span><img src="img/images/p4.jpg" /> </li>
+
+						<li>
+							<h3>品牌美酒&nbsp;低价抢购 </h3>
+							<h5>52度五粮液股份公司1995专卖店 </h5><span class="anim-price">
+	       				
+	       		200元</span><img src="img/images/p9.jpg" /> </li>
+
+					</ul>
+
+				</div>
+				<img src="img/images/p10.jpg" />
+
+			</div>
+
+			<!----------------------------------小轮播图部分-------------------------------->
+
+			<div class="floor-one">
+				<!--
+                                                   顶部             更多部分               -->
+
+				<div class="one-more">
+					<span class="floor-box">1F</span>
+					<h3> 白酒馆</h3>
+					<h5>更多</h5>
+
+				</div>
+
+				<!------------------------------左边部分--------------------->
+				<div class="one-left">
+					<div class="left-top">
+						<img src="img/images/p11.jpg" />
+					</div>
+
+					<ul class="left-list">
+						<li> 五粮液</li>
+						<li> 高端收藏</li>
+						<li> 茅台专场</li>
+						<li class="bnone"> 小酒迷情</li>
+						<li> 陈年老酒</li>
+						<li> 每周特卖</li>
+						<li> 郎酒专场</li>
+						<li class="bnone"> 清仓专区</li>
+					</ul>
+
+					<div class="left-bottom">
+						<img src="img/images/p12.jpg" />
+					</div>
+
+				</div>
+
+				<!--小轮播-->
+				<div class="one-little littl  xlbt ">
+
+					<ul class="one-ul ">
+						<li><img src="img/images/l1.jpg" /></li>
+						<li><img src="img/images/l2.jpg" /></li>
+					</ul>
+
+				</div>
+
+				<!--其他部分-->
+				<ul class="one-other">
+					<li> <img src="img/images/t1.jpg" /> </li>
+					<li> <img src="img/images/t2.jpg" /> </li>
+					<li> <img src="img/images/t3.jpg" /> </li>
+					<li> <img src="img/images/t4.jpg" /> </li>
+					<li> <img src="img/images/t5.jpg" /> </li>
+					<li> <img src="img/images/t6.jpg" /> </li>
+
+				</ul>
+
+			</div>
+
+			<div class="floor-one ">
+				<!--
+                                                   顶部             更多部分               -->
+
+				<div class="one-more">
+					<span class="floor-box">2F</span>
+					<h3> 白酒馆</h3>
+					<h5>更多</h5>
+
+				</div>
+
+				<!--
+            	左边部分
+            -->
+				<div class="one-left">
+					<div class="left-top">
+						<img src="img/images/p11.jpg" />
+					</div>
+
+					<ul class="left-list">
+						<li> 五粮液</li>
+						<li> 高端收藏</li>
+						<li> 茅台专场</li>
+						<li class="bnone"> 小酒迷情</li>
+						<li> 陈年老酒</li>
+						<li> 每周特卖</li>
+						<li> 郎酒专场</li>
+						<li class="bnone"> 清仓专区</li>
+					</ul>
+
+					<div class="left-bottom">
+						<img src="img/images/p12.jpg" />
+					</div>
+
+				</div>
+
+				<!--小轮播-->
+				<div class="one-little   xlbt">
+
+					<ul class="one-ul  ">
+						<li><img src="img/images/l1.jpg" /></li>
+						<li><img src="img/images/l2.jpg" /></li>
+					</ul>
+
+				</div>
+
+				<!--其他部分-->
+				<ul class="one-other">
+					<li> <img src="img/images/t1.jpg" /> </li>
+					<li> <img src="img/images/t2.jpg" /> </li>
+					<li> <img src="img/images/t3.jpg" /> </li>
+					<li> <img src="img/images/t4.jpg" /> </li>
+					<li> <img src="img/images/t5.jpg" /> </li>
+					<li> <img src="img/images/t6.jpg" /> </li>
+
+				</ul>
+
+			</div>
+
+			<div class="floor-one">
+				<!--
+                                                   顶部             更多部分               -->
+
+				<div class="one-more">
+					<span class="floor-box">3F</span>
+					<h3> 白酒馆</h3>
+					<h5>更多</h5>
+
+				</div>
+
+				<!--
+            	左边部分
+            -->
+				<div class="one-left">
+					<div class="left-top">
+						<img src="img/images/p11.jpg" />
+					</div>
+
+					<ul class="left-list">
+						<li> 五粮液</li>
+						<li> 高端收藏</li>
+						<li> 茅台专场</li>
+						<li class="bnone"> 小酒迷情</li>
+						<li> 陈年老酒</li>
+						<li> 每周特卖</li>
+						<li> 郎酒专场</li>
+						<li class="bnone"> 清仓专区</li>
+					</ul>
+
+					<div class="left-bottom">
+						<img src="img/images/p12.jpg" />
+					</div>
+
+				</div>
+
+				<!--小轮播-->
+				<div class="one-little  xlbt">
+
+					<ul class="one-ul ">
+						<li><img src="img/images/l1.jpg" /></li>
+						<li><img src="img/images/l2.jpg" /></li>
+					</ul>
+
+				</div>
+
+				<!--其他部分-->
+				<ul class="one-other">
+					<li> <img src="img/images/t1.jpg" /> </li>
+					<li> <img src="img/images/t2.jpg" /> </li>
+					<li> <img src="img/images/t3.jpg" /> </li>
+					<li> <img src="img/images/t4.jpg" /> </li>
+					<li> <img src="img/images/t5.jpg" /> </li>
+					<li> <img src="img/images/t6.jpg" /> </li>
+
+				</ul>
+
+			</div>
+
+			<div class="floor-one">
+				<!--
+                                                   顶部             更多部分               -->
+
+				<div class="one-more">
+					<span class="floor-box">4F</span>
+					<h3> 白酒馆</h3>
+					<h5>更多</h5>
+
+				</div>
+
+				<!--
+            	左边部分
+            -->
+				<div class="one-left">
+					<div class="left-top">
+						<img src="img/images/p11.jpg" />
+					</div>
+
+					<ul class="left-list">
+						<li> 五粮液</li>
+						<li> 高端收藏</li>
+						<li> 茅台专场</li>
+						<li class="bnone"> 小酒迷情</li>
+						<li> 陈年老酒</li>
+						<li> 每周特卖</li>
+						<li> 郎酒专场</li>
+						<li class="bnone"> 清仓专区</li>
+					</ul>
+
+					<div class="left-bottom">
+						<img src="img/images/p12.jpg" />
+					</div>
+
+				</div>
+
+				<!--小轮播-->
+				<div class="one-little   xlbt">
+
+					<ul class="one-ul ">
+						<li><img src="img/images/l1.jpg" /></li>
+						<li><img src="img/images/l2.jpg" /></li>
+					</ul>
+
+				</div>
+
+				<!--其他部分-->
+				<ul class="one-other">
+					<li> <img src="img/images/t1.jpg" /> </li>
+					<li> <img src="img/images/t2.jpg" /> </li>
+					<li> <img src="img/images/t3.jpg" /> </li>
+					<li> <img src="img/images/t4.jpg" /> </li>
+					<li> <img src="img/images/t5.jpg" /> </li>
+					<li> <img src="img/images/t6.jpg" /> </li>
+
+				</ul>
+
+			</div>
+
+			<!--
+       	无动画效果
+       -->
+			<div class="floor-one   no-anim">
+
+				<div class="one-more">
+					<span class="floor-box">5F</span>
+					<h3> 白酒馆</h3>
+					<h5>更多</h5>
+
+				</div>
+				<ul class="n-top">
+					<li><img src="img/images/n1.jpg" /></li>
+					<li><img src="img/images/n2.jpg" /></li>
+					<li><img src="img/images/n3.jpg" /></li>
+					<li><img src="img/images/n4.jpg" /></li>
+					<li><img src="img/images/n5.jpg" /></li>
+				</ul>
+
+				<img class="no-img" src="img/images/t7.jpg">
+
+			</div>
+
+			<!--------------------------左右移动效果-------------------------->
+
+			<div class="floor-one  floor-move">
+
+				<div class="one-more">
+					<span class="floor-box">6F</span>
+					<h3> 白酒馆</h3>
+					<h5>更多</h5>
+
+				</div>
+				<div class="move-lr">
+					<ul>
+						<li><img src="img/images/m1.jpg" /></li>
+						<li><img src="img/images/m2.jpg" /></li>
+						<li><img src="img/images/m3.jpg" /></li>
+						<li><img src="img/images/m4.jpg" /></li>
+						<li><img src="img/images/m5.jpg" /></li>
+						<li><img src="img/images/m6.jpg" /></li>
+						<li><img src="img/images/m7.jpg" /></li>
+						<li><img src="img/images/m8.jpg" /></li>
+						<li><img src="img/images/m9.jpg" /></li>
+						<li><img src="img/images/m10.jpg" /></li>
+						<li><img src="img/images/m11.jpg" /></li>
+						<li><img src="img/images/m12.jpg" /></li>
+						<li><img src="img/images/m13.jpg" /></li>
+						<li><img src="img/images/m14.jpg" /></li>
+						<li><img src="img/images/m15.jpg" /></li>
+
+					</ul>
+
+				</div>
+
+			</div>
+
+			<!----------------------------------------底部------------------------>
+			<!---------------------------底部------------------------>
+			<div class="buttom-one">
+				<div class="buttom-one-first">
+
+					<div class="first-one">
+						<p> 客服热线 7x14小时 （08：00 — 22：00） 贴心服务</p>
+						<div class="first-one-img">
+							<img src="img/top/call.jpg" /><span> 400-772-1919</span>
+
+						</div>
+					</div>
+					<div class="first-two-img">
+						<img src=" img/top/onlineServ.png" />
+					</div>
+
+					<div class=" first-three">
+						<p>超万平方米仓储体现店 </p>
+						<p> 上海松江区茂盛路202弄18号</p>
+						<p> 客服邮箱：
+							<a>kf@goujiuwang.com</a>
+						</p>
+						<p> 扫描二维码，掌握一手优惠资讯</p>
+
+					</div>
+					<img class="first-code" src="img/big-1/localhost/00001_qrcode_06.jpg" />
+
+				</div>
+
+				<!-------------------------黑色背景下半部分----------------------->
+				<div class="buttom-second">
+
+					<ul>
+
+						<li class="li-bold">新手指南</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+
+					</ul>
+
+					<ul>
+						<li class="li-bold">如何付款</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+
+					</ul>
+
+					<ul>
+						<li class="li-bold">配送方式</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+
+					</ul>
+
+					<ul>
+
+						<li class="li-bold">售后服务</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+
+					</ul>
+
+					<ul>
+						<li class="li-bold"> 关于我们</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+
+					</ul>
+
+					<ul class="third-yellow">
+						<li class="li-yellow">合作共赢</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+						<li>用户协议</li>
+
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="buttom-two">
+				<ul class="buttom-two-list">
+					<li>
+
+						<img src="img/top/save.jpg" />
+						<h3> 正品保证</h3>
+						<p>正品授权 发票随时</p>
+
+					</li>
+					<li>
+
+						<img src="img/top/transfor.jpg" />
+						<h3> 满百包邮</h3>
+						<p>满百即可享受全国包邮</p>
+
+					</li>
+					<li>
+
+						<img src="img/top/open.jpg" />
+						<h3>开箱验货</h3>
+						<p>正品授权 发票随时</p>
+
+					</li>
+					<li>
+
+						<img src="img/top/what.jpg" />
+						<h3> 可退换货</h3>
+						<p>正品授权 发票随时</p>
+
+					</li>
+					<li>
+
+						<img src="img/top/good.jpg" />
+						<h3> 良心商家</h3>
+						<p>正品授权 发票随时</p>
+
+					</li>
+
+				</ul>
+
+				<p class="goods-right">Copyright&copy;2009-2016 gjw.com,AllRights Reserved 上海线加下电子商务有限公司版权所有 </p>
+				<div class="post">
+
+					<div class="post-one">
+						<img src="img/top/pos1.jpg" />
+						<p>沪ICP备16030728</p>
+					</div>
+					<div class="post-two">
+						<img src="img/top/pos2.jpg" />
+						<p>公安机关网站备案</p>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</body>
+
+</html>

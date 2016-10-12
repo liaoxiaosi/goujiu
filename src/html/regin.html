@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录页</title>
+
+		<script src="../js/jquery-1.12.0.js"></script>
+		<script src="../js/Cookie.js"></script>
+		<link href="../css/login-common.css" rel="stylesheet" type="text/css" />
+		<link href="../css/regin.css" rel="stylesheet" type="text/css" />
+
+		<script>
+			onload = function() {
+
+				var obt = document.getElementById("submit"); //登录
+				var ophone = document.getElementById('username'); //手机邮箱号\n
+				var opassword = document.getElementById("pass");
+				
+				var phone = getcookie('username');
+				var password = getcookie('password');
+				
+				console.log(phone);
+				console.log(password);
+
+				if(phone && password) {
+					ophone.value = phone;
+					opassword.value = password;
+					alert("您已登录");
+
+				};
+
+				obt.onclick = function() {
+					if(ophone.value == phone && opassword.value == password) {
+						alert("登录成功！");
+					} else {
+						alert("输入信息有误，请重新输入！");
+					}
+
+				};
+
+				var oalert = document.getElementById('oalert');
+				ophone.onblur = function() {
+					
+					console.log("aaaaaaa");
+					if(ophone.value != phone) {
+						oalert.innerHTML = '手机号不正确，再想想吧';
+
+					} else {
+						oalert.innerHTML = '恭喜，输入正确';
+					}
+				};
+
+				opassword.onblur = function() {
+					if(opassword.value != password) {
+						oalert.innerHTML = '密码不正确,再想想吧！';
+
+					} else {
+						oalert.innerHTML = '恭喜，输入正确';
+					}
+
+				};
+
+			}
+		</script>
+
+	</head>
+
+	<body>
+		<div class="login">
+			<div class="top">
+				<ul>
+					<li class="top-img"><img src="../img/login/hd_logo.jpg" /> </li>
+					<li>如您已有账户
+						<a href="">请登录</a>
+					</li>
+					<li><img src="../img/login/help.jpg" />帮助 </li>
+					<li><img src="../img/login/server.jpg" />在线客服 </li>
+				</ul>
+
+			</div>
+
+			<div class="login-form">
+				
+				
+				<span id="oalert"> </span>
+				
+				<form>
+					<label class="login-form-top"><img src="../img/regin/p4.jpg"/> 购酒网会员登录</label>
+					<div class="box">
+						<div class=" border">
+							<label for="">
+				<img src="../img/regin/p1.jpg" />
+			</label>
+							<input type="text" id="username" placeholder="邮箱/手机号码" />
+						</div>
+						<div class=" border">
+							<label for=" ">
+				<img src="../img/regin/p2.jpg">
+			</label>
+							<input type="password" id="pass" />
+						</div>
+
+						<input type="checkbox" id="check" />自动登录<span> <a href="">忘记密码</a></span>
+						<input type="submit" value="登录" id="submit" />
+						<p>
+							<a href="">使用合作帐号登录</a>
+						</p>
+						<img class="other" src="../img/regin/p3.jpg">
+
+					</div>
+					<p class="new">
+						
+						<!--跳转到注册页面-->
+						<a href="login.html"> 注册新账户</a>
+					</p>
+				</form>
+
+				<div class="login-form-left">
+					<img src="../img/login/p1.jpg" />
+
+				</div>
+			</div>
+		</div>
+		<div class=" login-bottom">
+
+			<div class="login-bottom-one">
+				<ul>
+					<li>
+						<a href=""> 关于我们</a>
+					</li>
+					<li>
+						<a href=""> 练习我们</a>
+					</li>
+					<li>
+						<a href=""> 人才招聘</a>
+					</li>
+					<li>
+						<a href=""> 隐私声明</a>
+					</li>
+					<li>
+						<a href=""> 帮助中心</a>
+					</li>
+					<li>
+						<a href=""> 友情链接</a>
+					</li>
+
+				</ul>
+
+				<p class="login-right">Copyright&copy;2009-2016 gjw.com,AllRights Reserved 上海线加下电子商务有限公司版权所有 </p>
+
+			</div>
+
+		</div>
+
+		
+
+	</body>
+
+</html>

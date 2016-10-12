@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>懒加载部分</title>
+
+		<link href="../css/lazy.css" rel="stylesheet" type="text/css" />
+		<script src="js/jquery-1.12.0.js"></script>
+		<script>
+			/*
+						number.toFixed(2) : 保持2位小数，自动四舍五入
+					 */
+			$(function() {
+				var $datalist = $('.datalist');
+				var $ul = $('<ul/>');
+				$.ajaxSetup({
+					url: 'data/goodslist.json',
+					success: function(res) {
+						console.log(res);
+
+						// 生成一个ul
+						$.each(res, function(idx, item) {
+							var $li = $('<li/>');
+							$('<a/>').attr({
+								href: item.url
+							}).html('<img src="' + item.imgurl + '"/>').appendTo($li);
+							$('<p/>').addClass('title').html(item.title).appendTo($li);
+
+							// 计算折扣后的价格
+							var price = (item.price * item.off).toFixed(2)
+							$('<p/>').addClass('price').html('<span>&yen;' + price + '</span><del>&yen;' + item.price.toFixed(2) + '</del>').appendTo($li);
+
+							$li.appendTo($ul);
+						});
+
+						$datalist.append($ul);
+					}
+				});
+
+				$.ajax();
+
+				// 懒加载效果
+				// 给window绑定scroll事件，当差不多滚动到底部是加载更多内容
+				$(window).on('scroll', function() {
+					// 获取滚动条滚动过的距离
+					var scrollTop = $(window).scrollTop();
+
+					// 当差不多滚动到底部是加载更多内容
+					if(scrollTop >= $(document).height() - $(window).height() - 100) {
+						$.ajax();
+					}
+				});
+
+				//				3.点击右边固定的返回顶部即返回
+				var $back = $('.one');
+
+				$back.on("click", function() {
+					//top
+
+					$("html,body").animate({
+						scrollTop: 0
+					}); //点击回到顶部
+
+				});
+
+				//			最右边固定部分鼠标划过效果	
+				var $right_ul = $('.right-content');
+				$right_ul.on('mouseenter', 'li', function() {
+					$(this).find('span').removeClass('hover').addClass('hover').animate({
+						right: 30
+					});
+
+				})
+				$right_ul.on('mouseleave', 'li', function() {
+					$(this).find('span').removeClass('hover');
+
+				})
+
+			})
+		</script>
+
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="datalist">
+				<!-- <ul>
+			<li><a href=""><img src="images/g1.jpg" alt=""></a><p class="title">国庆大优惠，只要998</p></li>
+			<li><a href=""><img src="images/g2.jpg" alt=""></a></li>
+			<li><a href=""><img src="images/g3.jpg" alt=""></a></li>
+			<li><a href=""><img src="images/g4.jpg" alt=""></a></li>
+			<li><a href=""><img src="images/g5.jpg" alt=""></a></li>
+		</ul> -->
+			</div>
+
+			<!--头部-->
+			<div class="lazy-top">
+
+				<div class="top">
+					<div class="focus">
+						<p><img src="" />关注购酒网<img src="../img/top/p1-1.jpg" /><span></span></p>
+					</div>
+					<ul class="regin">
+						<li>Hi,请
+							<a href=" ">登陆/</a>
+							<a href="html/login.html">注册</a>&nbsp;&nbsp;|</li>
+						<li>我的订单&nbsp;&nbsp;|</li>
+						<li>用户中心&nbsp;&nbsp;|<span></span></li>
+						<li>在线客服&nbsp;&nbsp;|</li>
+						<li>帮助&nbsp;&nbsp;|</li>
+						<li class="comment">提意见&nbsp;&nbsp;|</li>
+						<li class="cell"><img src="../img/top/p1.jpg" />400-722-1919</li>
+
+					</ul>
+
+				</div>
+				<div class="top-little">
+
+					<div class="top-content">
+						<img src="../img/top/p2.jpg" /> 购酒网68元抢超值福利福袋，好礼享不停 <span class="top-close"> 关闭 </span>
+
+					</div>
+
+				</div>
+				<!-- 最右边，固定位置部分    -->
+				<div class="right">
+					<ul class="right-content">
+						<li> <img src="../img/top/p3.jpg" /><span>会员中心</span></li>
+						<li class="right-car">
+							<a href=" "><img src="../img/top/p4.jpg" />购物车</a>
+						</li>
+						<li class="ticket">券<span>我的优惠券</span></li>
+						<li><img src="../img/top/p5.jpg" /><span>我的收藏</span></li>
+						<li><img src="../img/top/p6.jpg" /><span>我的收藏</span></li>
+						<li><img src="../img/top/p7.jpg" /><span>好货推荐</span></li>
+						<li><img src="../img/top/p8.jpg" /><span>在线客服</span></li>
+						<li class="second"><img src="../img/top/p9.jpg" /><span>用户反馈</span></li>
+						<li class="one"><img src="../img/top/p10.jpg" /><span>返回顶部</span></li>
+					</ul>
+
+				</div>
+
+				<!-----------------导航部分------------------>
+				<div class="nav">
+					<img class="logo" src="../img/top/logo.jpg" />
+					<img class="bag" src="../img/top/fd.gif" />
+					<div class="sc"><input class="search" type="text" /><span>搜索</span></div>
+					<div class="mycar"><img src="../img/top/car.jpg" />我的购物车&gt;<span>0</span></div>
+					<ul class="list">
+						<li>茅台</li>
+						<li>郎酒</li>
+						<li>五粮液</li>
+						<li>剑南春</li>
+						<li>泸州老窖</li>
+						<li>洋河</li>
+
+					</ul>
+
+				</div>
+
+				<div class="content">
+					<div> </div>
+					<ul class='content-list'>
+						<li class="red">
+							<a href=""> 首页 </a>
+						</li>
+						<li>
+							<a href="">特卖会</a>
+						</li>
+						<li>
+							<a href="">进口馆</a>
+						</li>
+						<li>
+							<a href="">陈年老酒</a>
+						</li>
+						<li>
+							<a href="">醉爱小酒版</a>
+						</li>
+
+					</ul>
+					<img class="specile2" src="../img/top/sp.gif" />
+
+				</div>
+
+				<!-------------------红色商品分类部分------------------>
+
+				<div class="allgoods1">
+
+					<h4>全部商品分类</h4>
+				</div>
+			</div>
+		</div>
+		<!--------------------------------------底部-------------------------------------------------底部------------------------>
+		<!--<div class="buttom-one">
+			<div class="buttom-one-first">
+				
+				<div class="first-one">
+					<p> 客服热线 7x14小时 （08：00 — 22：00） 贴心服务</p>
+					<div class="first-one-img">
+						<img src="../img/top/call.jpg"/><span> 400-772-1919</span>
+						
+					</div>
+				</div>
+				<div class="first-two-img">
+					<img src=" ../img/top/onlineServ.png" />		
+				</div>
+				
+				<div class=" first-three">
+					<p>超万平方米仓储体现店 </p>
+					<p> 上海松江区茂盛路202弄18号</p>
+					<p> 客服邮箱：<a>kf@goujiuwang.com</a></p>
+					<p> 扫描二维码，掌握一手优惠资讯</p>
+					
+				</div>
+				<img class="first-code" src="../img/big-1/localhost/00001_qrcode_06.jpg" />
+				
+				
+				
+				
+			</div>
+			-->
+		<!-------------------------黑色背景下半部分----------------------->
+		<!--<div class="buttom-second">
+				
+					<ul>
+						
+					<li class="li-bold">新手指南</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					
+					</ul>
+
+					<ul>						
+					<li class="li-bold">如何付款</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					
+					</ul>
+					
+					<ul>
+					<li class="li-bold">配送方式</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					
+					</ul>
+	
+					<ul>
+						
+					<li class="li-bold">售后服务</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					
+					</ul>
+					
+					<ul>
+					<li class="li-bold"> 关于我们</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+				
+					</ul>
+					
+					<ul class="third-yellow">
+					<li class="li-yellow">合作共赢</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+					<li>用户协议</li>
+						
+					</ul>
+		
+				
+			</div>
+		
+		
+		
+		</div>	
+		
+		<div class="buttom-two">
+			<ul class="buttom-two-list">
+				<li> 
+					
+					<img src="../img/top/save.jpg"/>
+					<h3> 正品保证</h3>
+					<p>正品授权 发票随时</p>
+
+				</li>
+				<li> 
+					
+					<img src="../img/top/transfor.jpg"/>
+					<h3> 满百包邮</h3>
+					<p>满百即可享受全国包邮</p>
+
+				</li>
+				<li> 
+					
+					<img src="../img/top/open.jpg"/>
+					<h3>开箱验货</h3>
+					<p>正品授权 发票随时</p>
+
+				</li>
+				<li> 
+					
+					<img src="../img/top/what.jpg"/>
+					<h3> 可退换货</h3>
+					<p>正品授权 发票随时</p>
+
+				</li>
+				<li> 
+					
+					<img src="../img/top/good.jpg"/>
+					<h3> 良心商家</h3>
+					<p>正品授权 发票随时</p>
+
+				</li>
+				
+				
+			</ul>
+			
+			
+			<p class="goods-right">Copyright&copy;2009-2016 gjw.com,AllRights Reserved 上海线加下电子商务有限公司版权所有 </p>
+			<div class="post">
+				
+				<div class="post-one">
+					<img src="../img/top/pos1.jpg" />
+					<p>沪ICP备16030728</p>
+				</div>
+				<div class="post-two">
+					<img src="../img/top/pos2.jpg" />
+					<p>公安机关网站备案</p>
+					
+				</div>
+		
+			</div>
+		
+		
+		
+		
+		</div>-->
+
+	</body>
+
+</html>

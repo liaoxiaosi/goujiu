@@ -1,0 +1,546 @@
+/************************楼梯部分******************/
+
+#LoutiNav {
+	width: 32px;
+	position: fixed;
+	top: 150px;
+	left: 0;
+	border: 1px solid #ddd;
+	display: none;
+	z-index: 23;
+}
+
+#LoutiNav ul li {
+	width: 32px;
+	height: 70px;
+	border-bottom: 1px dotted #DDDDDD;
+	list-style: none;
+	font-size: 18px;
+	color: #666;
+	text-align: center;
+	line-height: 35px;
+	position: relative;
+	cursor: pointer;
+	background: white;
+}
+
+#LoutiNav ul li span {
+	width: 32px;
+	height: 70px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 14px;
+}
+
+#LoutiNav ul li span {
+	display: none;
+}
+
+#LoutiNav ul li.last {
+	background: #C00;
+	color: #fff;
+	border-bottom: 1px solid #ddd;
+}
+
+#LoutiNav ul li.hover span {
+	background: #c00;
+	color: #fff;
+	display: block;
+}
+
+.yb {
+	position: absolute;
+	right: 0;
+	top: 250px;
+	z-index: 20;
+}
+
+
+/********************************      大轮播图部分           **********************/
+
+
+/*********************8 倒计时部分   ***********************/
+
+.third {
+	position: relative;
+	top: -40px;
+}
+
+.third .third-list1 {
+	width: 1206px;
+	height: 172px;
+	float: left;
+	margin-top: -20px;
+	margin-left: 40px;
+	clear: both;
+}
+
+.third .third-list1 li {
+	float: left;
+	border-right: 1px solid #ffffff;
+}
+
+.third .third-list2 {
+	width: 1206px;
+	height: 268px;
+	float: left;
+	clear: both;
+	margin-left: 40px;
+}
+
+.third .third-list2 dd {
+	padding-left: 8px;
+	float: left;
+	width: 175px;
+	height: 234px;
+	border: 1px solid darkgray;
+	display: block;
+	position: relative;
+}
+
+.third .third-list2 dd div {
+	font-size: 16px;
+}
+
+.third .third-list2 h4 {
+	font-size: 18px;
+	color: black;
+	line-height: 28px;
+	float: left;
+}
+
+.third dt {
+	width: 1206px;
+	height: 28px;
+	float: left;
+}
+
+.third .third-list2 .third-list2-left span {
+	font-size: 12px;
+	color: gray;
+	line-height: 28px;
+	float: left;
+}
+
+.third .third-list2 .third-list2-left {
+	width: 212px;
+	height: 28px;
+	float: left;
+	margin-top: 2px;
+}
+
+.third .third-list2 .third-list2-right span {
+	font-size: 12px;
+	color: gray;
+	line-height: 28px;
+	float: left;
+}
+
+.third .third-list2 .third-list2-right {
+	width: 212px;
+	height: 28px;
+	margin-left: 950px;
+}
+
+.third .third-list2 dd .txt {
+	font-size: 14px;
+	padding-left: 8px;
+	width: 150px;
+	height: 14px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.third .third-list2 dd .txt:hover {
+	color: red;
+}
+
+.third .third-list2 dd h2 {
+	font-size: 16px;
+	color: red;
+}
+
+.third .third-list2 dd div {
+	font-size: 14px;
+}
+
+.third .third-list2 dd span:hover {
+	font-size: 18px;
+	color: red;
+}
+
+.third .third-list2 dd span {
+	color: red;
+}
+
+.third .third-list2 .ytp {
+	font-size: 12px;
+	color: #999999;
+}
+
+.third .third-list2 .ytp li {
+	width: 210px;
+	float: left;
+	padding: 6px;
+	clear: both;
+}
+
+.third .third-list2 .ytp span {
+	color: #999999;
+}
+
+.third .third-list2 .ytp li span {
+	float: left;
+	margin-left: 40px;
+	font-size: 14px;
+	clear: both;
+}
+
+.third .third-list2 .ytp li h5 {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+}
+
+.third .third-list2 .ytp {
+	width: 252px;
+	margin-left: 10px;
+}
+
+.third .third-list2 dd ul li img {
+	width: 230px;
+	margin-top: 10px;
+}
+
+.tp {
+	width: 1260px;
+	height: 137px;
+	margin-left: 20px;
+	position: relative;
+}
+
+.tp img {
+	width: 1260px;
+	height: 137px;
+}
+
+
+/*左右动画效果*/
+
+.anim-box {
+	width: 1260px;
+	height: 430px;
+	margin-left: 40px;
+	position: relative;
+	top: 450px;
+}
+
+.divice {
+	width: 240px;
+	height: 430px;
+	position: absolute;
+	top: 0;
+}
+
+.divice .divice-left span {
+	font-size: 18px;
+	color: #515151;
+}
+
+.divice .divice-left h6 {
+	font-size: 12px;
+	display: inline-block;
+	color: #adadad;
+}
+
+.divice .divice-tp {
+	width: 238px;
+	height: 398px;
+	border: 1px solid #dddddd;
+}
+
+.anim-box .anim {
+	width: 740px;
+	height: 415px;
+	position: absolute;
+	top: 0;
+	left: 239px;
+}
+
+.anim-box .anim ul {
+	width: 740px;
+	height: 415px;
+	clear: both;
+	margin-top: 21px;
+	clear: both;
+}
+
+.anim-box .anim ul li {
+	height: 202px;
+	border: 1px solid #dddddd;
+	width: 244px;
+	float: left;
+	position: relative;
+}
+
+.anim-box .anim ul li h3 {
+	font-size: 18px;
+	text-align: center;
+	font-weight: bold;
+	line-height: 24px;
+	margin-top: 6px;
+}
+
+.anim-box .anim ul li img {
+	width: 100px;
+	height: 100px;
+	display: block;
+	position: absolute;
+	left: 58px;
+	bottom: 10px;
+}
+
+.anim-box .anim ul li h5 {
+	font-size: 12px;
+	text-align: center;
+	line-height: 30px;
+}
+
+.anim-box .anim ul li span {
+	width: 60px;
+	height: 22px;
+	background: red;
+	color: white;
+	display: block;
+	border-radius: 40%;
+	margin-left: 80px;
+	font-size: 12px;
+	line-height: 22px;
+	text-align: center;
+}
+
+.anim-box .anim ul li:hover {
+	color: red;
+}
+
+.anim-box img {
+	float: left;
+	display: block;
+	width: 238px;
+	height: 400px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+
+/***************************************小轮播图部分*********************/
+
+.floor-one {
+	margin-left: 40px;
+	width: 1270px;
+	height: 516px;
+	position: relative;
+	top: 460px;
+	border: 1px solid red;
+	clear: both;
+}
+
+
+/******************************** 左边部分*******************************/
+
+.floor-one .one-left {
+	width: 320px;
+	height: 516px;
+	float: left;
+}
+
+
+/*顶部             更多部分*/
+
+.floor-one .one-more {
+	width: 1260px;
+	height: 24px;
+	padding: 4px 0;
+	border-bottom: 2px solid #d00d0f;
+	clear: both;
+}
+
+.floor-one .one-more .floor-box {
+	float: left;
+	display: block;
+	font-size: 13px;
+	width: 32px;
+	height: 22px;
+	color: white;
+	background: red;
+	text-align: center;
+	line-height: 22px;
+}
+
+.one-more h3 {
+	display: inline-block;
+	font-size: 16px;
+	color: #666666;
+	float: left;
+	margin-left: 8px;
+}
+
+.one-more h5 {
+	font-size: 14px;
+	position: absolute;
+	right: 0;
+}
+
+.one-left ul {
+	padding: 22px 18px;
+	width: 288px;
+	height: 54px;
+	clear: both;
+}
+
+.one-left ul li {
+	width: 64px;
+	height: 18px;
+	border-right: 1px solid #ac6f05;
+	float: left;
+	font-size: 12px;
+	margin-bottom: 16px;
+	color: #ac6f05;
+	text-align: center;
+	line-height: 18px;
+}
+
+.one-left ul .bnone {
+	border: none;
+}
+
+.one-left ul li:hover {
+	color: red;
+}
+
+
+/************轮播部分************/
+
+.floor-one .one-little {
+	width: 442px;
+	height: 240px;
+	left: 442px;
+	top: 26px;
+	float: left;
+	overflow: hidden;
+}
+
+.floor-one .one-little .one-ul {
+	width: 884px;
+	height: 240px;
+}
+
+.floor-one .one-little .one-ul li {
+	float: left;
+}
+
+
+/***********其他部分****************/
+
+.floor-one .one-other li {
+	width: 222px;
+	height: 240px;
+	float: left;
+}
+
+
+/***************************************无效果部分********************/
+
+.no-anim {
+	width: 1260px;
+	height: 440px;
+	clear: both;
+}
+
+.floor-one .n-top li {
+	float: left;
+}
+
+.floor-one .n-top .no-img {
+	margin-left: -20px;
+	width: 1270px;
+}
+
+
+/*******************************左右移动部分****************************/
+
+.floor-move {
+	width: 1260px;
+	height: 430px;
+	clear: both;
+}
+
+.floor-move .move-lr {
+	width: 1260px;
+	height: 400px;
+	border-left: 1px solid #ADADAD;
+	border-right: 1px solid #ADADAD;
+}
+
+.floor-move .move-lr ul {
+	height: 370px;
+	width: 1260px;
+	margin: 0 12px;
+}
+
+.floor-move .move-lr li {
+	width: 226px;
+	height: 110px;
+	float: left;
+	overflow: hidden;
+	margin: 8px;
+	position: relative;
+}
+
+.floor-move .move-lr li img {
+	display: block;
+	position: absolute;
+	left: 0;
+}
+
+
+/*********************************吸顶菜单*/
+
+.xiding {
+	width: 1300px;
+	height: 50px;
+	position: absolute;
+	top: 500px;
+	background: #df3232;
+	z-index: 22;
+	clear: both;
+}
+
+.xiding img {
+	width: 344px;
+	height: 50px;
+}
+
+.xiding .sc span {
+	width: 86px;
+	height: 42px;
+	background: red;
+	display: inline-block;
+	text-align: center;
+	line-height: 42px;
+}
+
+.xiding .search {
+	width: 450px;
+	height: 38px;
+	float: left;
+	border: 2px solid red;
+}
+
+.xiding .sc {
+	margin-left: 345px;
+	margin-top: -50px;
+}

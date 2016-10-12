@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>购酒网注册</title>
+
+		<script src="../js/jquery-1.12.0.js"></script>
+		<link type="text/css" href="../css/login-common.css" rel="stylesheet" />
+		<link type="text/css" href="../css/login.css" rel="stylesheet" />
+
+		<script src="../js/Cookie.js"></script>
+
+		<script>
+			//思路： 获取点击登录事件      2、获取点击10天免登录事件  3、在10免登录事件中设置cookie
+			// 在整个页面加载后   获取cookie    
+			onload = function() {
+				//			表单合法性
+
+				//手机验证
+
+				var ocheck = document.getElementById("check-old1"); //十天免登录
+				var osubmit = document.getElementById("submit"); //注册
+				var oreset = document.getElementById("reset"); //重置
+				var ouser = document.getElementById("cellnum"); //手机号
+				var opass = document.getElementById("pass1"); //密码
+				var oalert = document.getElementById('alert'); //提示
+
+				if(olduser && oldpass) {
+					ouser.value = olduser;
+					opass.value = oldpass;
+
+				};
+
+				ouser.onblur = function() {
+
+					// 匹配手机号码？
+					// 13012345678
+
+					// 开头是1  第二个数字3，4,5，7,8     9个数字
+					// 1             [34578]              \d{9}
+
+					// var reg = /^1[34578]\d{9}$/;
+
+					var cellnumber = this.value;
+					var str1 = /^1[34578]\d{9}$/.test(cellnumber);
+					if(str1 == true) {
+
+						oalert.innerHTML = "输入手机号合法";
+
+					} else {
+						oalert.innerHTML = "输入手机号不合法";
+						cellnumber = "";
+					}
+					console.log(str1);
+				}
+
+				/************			//密码部分***************************/ //
+
+				opass.onblur = function() {
+					//				密码任意数字,6-20位即可
+					var passw = this.value;
+					var str2 = /^.{6,20}/.test(passw);
+
+					if(str2) {
+
+						alert.innerHTML = "密码合法";
+
+					} else {
+						oalert.innerHTML = "密码不合法";
+						passw = "";
+					}
+
+					var pwd2 = document.getElementById("pass2");
+					pwd2.onblur = function() {
+						var passw2 = this.value;
+						var str3 = /^.{6,20}/.test(passw2);
+						if(str3 == str2) {
+
+							oalert.innerHTML = "密码一致";
+
+						} else {
+							oalert.innerHTML = "密码不一致";
+							passw2 = "";
+						}
+
+					}
+				}
+
+				//随机验证码
+				//产生四位数的随机数
+				var oyzm = document.getElementById('yzm');
+				var ock = document.getElementById('get-check') //输入框
+				var ospan2 = document.getElementById('yz'); //随机数位置
+				var ospan = document.getElementById('get'); //点击的对象
+
+				ospan.onclick = function() {
+
+					var num = "";
+					for(var i = 0; i < 4; i++) {
+						var str = parseInt(Math.random() * 10);
+						num += str;
+
+					}
+					ospan2.innerHTML = num;
+
+				}
+
+				ock.onblur = function() {
+					var number2 = ospan2.innerHTML;
+					if(ock.value != number2) {
+						oalert.innerHTML = "验证码不正确";
+
+						ock.value = "";
+					} else {
+						oalert.innerHTML = "验证码正确";
+					}
+
+				}
+
+				var olduser = getcookie("username");
+				var oldpass = getcookie("password");
+				if(olduser) {
+					ouser.value = olduser;
+					opass.value = oldpass;
+				}
+
+				//如果勾选了10天免登录，那么保存信息
+				if(ocheck.checked) {
+
+					//设置cookie
+					var d = new Date;
+					d.setDate(d.getDate() + 10);
+					var cookietext = setcookie("username", ouser.value, d);
+					var cookietext = setcookie("password", opass.value, d);
+
+				}
+				//      邮箱注册
+				var ocheck2 = document.getElementById("check-old2");
+				var osubmit2 = document.getElementById("submit2");
+				var oreset2 = document.getElementById("reset2");
+				var ouser2 = document.getElementById("mail-num");
+				var opass2 = document.getElementById("pass3");
+
+				var olduser2 = getcookie("username");
+				var oldpass2 = getcookie("password");
+				if(olduser2) {
+					ouser2.value = olduser2;
+					opass2.value = oldpass2;
+				}
+
+				//点击提交后    且勾选了十天免登录后   设置cookie
+
+				if(ocheck2.checked) {
+
+					//设置cookie
+					var d = new Date;
+					d.setDate(d.getDate() + 10);
+					var cookietext = setcookie("username", ouser2.value, d);
+					var cookietext = setcookie("password", opass2.value, d);
+				}
+
+				//					//手机号注册是否成功
+				//			
+
+				$(function() {
+					var reg1 = /^1[34578]\d{9}$/;
+					var reg2 = /^.{6,20}/;
+
+					console.log(reg1.test($('#cellnum').val()));
+
+					var obtn = $('#submit');
+
+					//console.log($('#submit'));
+					obtn.on('click', function() {
+						console.log($('#submit'));
+						console.log(reg1.test($('#cellnum').val()));
+						console.log(reg1);
+						console.log($('#cellnum'));
+						//	alert('what');
+
+						//如果手机号格式正确  密码格式正确且两次输入一致    验证码输入正确  那么验证成功
+						if(reg1.test($('#cellnum').val()) == false || reg2.test($('#pass1').val()) == false || reg2.test($('#pass1').val()) != reg2.test($('#pass2').val()) || $('#get-check').val() != $('#yz').html()) {
+							alert("信息错误，不能注册！");
+
+						} else {
+							alert("注册成功！");
+						}
+
+					})
+
+					var $cell = $(".cell-login");
+					var $mail = $('.mail-login');
+
+					var $login = $('.login-form');
+					var $loginul = $('.login-form').find('ul');
+					var $loginli = $loginul.children('li');
+					//				点击事件
+					//				初始化
+
+					$loginul.find("li:eq(0)").addClass("active");
+					$cell.css({
+						'display': 'block'
+					});
+					$mail.css({
+						'display': 'none'
+					});
+
+					$loginul.on('click', 'li', function() {
+
+						$(this).removeClass('active').addClass('active');
+						$(this).siblings().removeClass('active');
+
+						if($(this).hasClass('bord')) {
+							$cell.css({
+								'display': 'block'
+							});
+							$mail.css({
+								'display': 'none'
+							});
+						} else {
+
+							$mail.css({
+								'display': 'block'
+							});
+							$cell.css({
+								'display': 'none'
+							});
+						}
+
+					})
+
+				})
+
+			}
+		</script>
+
+	</head>
+
+	<body>
+		<div class="login">
+
+			<div class="top">
+				<ul>
+					<li class="top-img"><img src="../img/login/hd_logo.jpg" /> </li>
+					<li>如您已有账户
+						<a id="goto" href="regin.html">请登录</a>
+					</li>
+					<li><img src="../img/login/help.jpg" />帮助 </li>
+					<li><img src="../img/login/server.jpg" />在线客服 </li>
+				</ul>
+
+			</div>
+			<div class="login-form">
+				<ul class="form-top">
+					<li class="bord"> <img src="../img/login/cellphone.jpg" /><span>手机注册</span></li>
+					<li class="mail"> <img src="../img/login/mail.jpg" /><span>邮箱注册</span></li>
+
+				</ul>
+
+				<div id="alert"> </div>
+				<form>
+					<div class="cell-login">
+						<input id="cellnum" type="text" placeholder="手机号：" />
+
+						<input id="pass1" type="password" placeholder="设置密码：6-20位" placeholder="6-20个非空字符" />
+
+						<input id="pass2" type="password" placeholder="确认密码" />
+
+						<div id="yzm"><input id="get-check" type="text" placeholder="验证码" /><span id="yz"> </span><span id="get">换一张</span> </div>
+
+						<div id="check">
+							校验码：
+							<button>获取校验码</button>
+							<img src="../img/login/checkcall.jpg" />
+							<input id="login-cell" type=" text" />
+						</div>
+						<p> 点击注册，表示您同意购酒网
+							<a href="">服务协议</a>
+						</p>
+
+						<input id="check-old1" type="checkbox" />十天免登录<br />
+						<input id="reset" type="reset" value="重置" />
+						<input id="submit" type="submit" value="注册">
+
+					</div>
+					<!--邮箱验证-->
+					<div class="mail-login">
+						<input id="mail-num" type="text" placeholder="邮箱：" />
+						<input id="pass3" type="password" placeholder="设置密码：" placeholder="6-20个非空字符" />
+						<input id="pass4" type="password" placeholder="确认密码" />
+
+						<input id="celphone" type="text" placeholder="手机号：" />
+
+						<div class="yzm"><input id="get-check2" type="text" placeholder="验证码" /><span class="yz"> </span><span class="get">换一张</span> </div>
+						<p> 点击注册，表示您同意购酒网
+							<a href="">服务协议</a>
+						</p>
+						<input id="check-old2" type="checkbox" />十天免登录<br />
+						<input id="reset2" type="reset" value="重置" />
+						<input id="submit2" type="submit" value="注册">
+
+					</div>
+
+				</form>
+				<div class="login-form-right">
+					<img src="../img/login/p1.jpg" />
+
+				</div>
+			</div>
+			<div class=" login-bottom">
+
+				<div class="login-bottom-one">
+					<ul>
+						<li>
+							<a href=""> 关于我们</a>
+						</li>
+						<li>
+							<a href=""> 练习我们</a>
+						</li>
+						<li>
+							<a href=""> 人才招聘</a>
+						</li>
+						<li>
+							<a href=""> 隐私声明</a>
+						</li>
+						<li>
+							<a href=""> 帮助中心</a>
+						</li>
+						<li>
+							<a href=""> 友情链接</a>
+						</li>
+
+					</ul>
+
+					<p class="login-right">Copyright&copy;2009-2016 gjw.com,AllRights Reserved 上海线加下电子商务有限公司版权所有 </p>
+
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+
+</html>

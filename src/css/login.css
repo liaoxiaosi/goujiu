@@ -1,0 +1,173 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+.login {
+	width: 1260px;
+	height: 786px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.login-form {
+	position: relative;
+	width: 970px;
+	height: 570px;
+	margin: 0 auto;
+	border: 4px solid #d8d8d8;
+	margin-top: 24px;
+}
+
+
+/******************右边图片部分**************/
+
+.login-form .login-form-right {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 570px;
+	width: 369px;
+	border-left: 1px solid #d8d8d8;
+}
+
+.login-form-right img {
+	margin-left: 34px;
+	margin-top: 86px;
+}
+
+.login-form .form-top {
+	width: 524px;
+	height: 84px;
+	margin-left: 40px;
+	clear: both;
+}
+
+.login-form .form-top li {
+	float: left;
+	width: 260px;
+	height: 84px;
+	font-size: 14px;
+	line-height: 84px;
+	text-align: center;
+	border-bottom: 1px solid #d8d8d8;
+}
+
+.login-form .form-top li span {
+	font-size: 18px;
+}
+
+.login-form .form-top .bord {
+	border-right: 1px solid #d8d8d8;
+}
+
+.login-form .form-top ul {
+	clear: both;
+}
+
+.login-form .form-top li:hover {
+	cursor: pointer;
+}
+
+.login-form .form-top li.active {
+	border-bottom: 2px solid red;
+}
+
+
+/******************表单部分**************/
+
+.login-form #alert {
+	width: 240px;
+	height: 30px;
+	line-height: 30px;
+	color: red;
+	margin-left: 170px;
+	margin-top: 10px;
+}
+
+.cell-login {
+	width: 354px;
+	height: 400px;
+	margin-left: 122px;
+	margin-top: 40px;
+}
+
+.cell-login #cellnum,
+#pass1,
+#pass2 {
+	width: 354px;
+	height: 40px;
+	margin-bottom: 10px;
+}
+
+#get-check,
+#login-cell {
+	width: 150px;
+	height: 40px;
+}
+
+#submit {
+	width: 354px;
+	height: 40px;
+	color: white;
+	background: red;
+}
+
+form #yzm {
+	position: relative;
+}
+
+form #yz {
+	width: 60px;
+	height: 40px;
+	background: black;
+	color: white;
+	display: inline-block;
+	position: absolute;
+	bottom: 0;
+	font-size: 22px;
+	line-height: 40px;
+}
+
+form #get {
+	position: absolute;
+	right: 0;
+}
+
+form #get:hover {
+	cursor: pointer;
+}
+
+#get-check,
+#get-check2 {
+	width: 120px;
+	height: 40px;
+}
+
+.mail-login {
+	width: 354px;
+	height: 400px;
+	margin-left: 122px;
+	margin-top: 40px;
+}
+
+#celphone,
+#mail-num,
+#pass3,
+#pass4 {
+	width: 354px;
+	height: 40px;
+	margin-bottom: 10px;
+}
+
+#submit2 {
+	width: 354px;
+	height: 40px;
+	color: white;
+	background: red;
+}

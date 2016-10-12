@@ -1,0 +1,69 @@
+.littl {
+	overflow: hidden;
+	width: 442px;
+}
+
+.littl ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 1000px;
+	position: relative;
+}
+
+.littl li {
+	float: left;
+	width: 442px;
+	height: 240px;
+}
+
+.littl li img {
+	display: block;
+	width: 442px;
+	height: 240px;
+}
+
+.littl .page {
+	position: absolute;
+	left: 50px;
+	bottom: 10px;
+	padding: 10px;
+}
+
+.littl .page span {
+	display: inline-block;
+	margin: 0 5px;
+	width: 10px;
+	height: 10px;
+	background-color: #acacac;
+	text-align: center;
+	border-radius: 100%;
+}
+
+.littl .page span.active {
+	background-color: red;
+}
+
+.littl .next,
+.xcarousel .previous {
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	margin-top: -25px;
+	width: 30px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	background-color: #efefef;
+	opacity: 0.5
+}
+
+.littl .next {
+	left: auto;
+	right: 10px;
+}
+
+.littl .next:hover,
+.xcarousel .previous:hover {
+	opacity: 0.8;
+}
