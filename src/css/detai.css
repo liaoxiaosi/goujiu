@@ -241,7 +241,7 @@ li {
 	text-align: center;
 }
 
-.content {
+goods-detail .content {
 	width: 100%;
 	height: 50px;
 	z-index: 1;
@@ -313,8 +313,7 @@ li {
 /**************************************底部**********************************************/
 
 .buttom {
-	
-	/*top: -450px;*/
+	margin-top: 6030px;
 }
 
 .buttom-one {
@@ -323,11 +322,8 @@ li {
 	margin-left: 40px;
 	border: 1px solid red;
 	clear: both;
-	
 	position: relative;
-	top: 460px;
-	
-	
+	top: 0;
 	background: url(../img/top/bg.jpg) repeat-y;
 }
 
@@ -455,11 +451,9 @@ li {
 	height: 166px;
 	width: 1260px;
 	border: 2px solid red;
-	
 	position: relative;
-	top: 460px;
+	top: 0;
 	margin-left: 40px;
-	
 	clear: both;
 }
 
@@ -544,35 +538,116 @@ li {
 
 /*****************************商品介绍部分******************************/
 
-.goods-detail img {
+.goods-detail {
 	width: 1260px;
-	height: 1200px;
+	height: 1800px;
 	position: relative;
 	top: 10px;
+}
+
+.goods-detail .detail1 {
+	width: 1260px;
+	height: 1800px;
 }
 
 
 /*****************************放大镜部分部分******************************/
 
-#fdj {	width: 1260px;
+#fdj {
+	width: 1260px;
 	height: 625px;
 	border: 1px solid red;
-	margin-left: 40px;
+	margin-left: 10px;
 }
 
 #fdj .fdj-right {
 	position: absolute;
-	right: 0;	
+	right: 0;
+}
+
+.choose {
+	width: 525px;
+	height: 526px;
+	border: 1px solid red;
+	margin-left: 470px;
+	margin-top: -510px;
+}
+
+.xm_middle {
+	width: 500px;
+	margin-top: 30px;
+	margin-left: 20px;
+}
+
+.p_shang {
+	color: #5e5e5e;
+	font-size: 24px;
+	margin: 0px 0px 20px 0px;
+}
+
+.p_xia {
+	color: #E54948;
+	font-size: 30px;
+	margin-bottom: 30px;
+}
+
+.price1 {
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+
+.price {
+	color: #E54948;
+	font-size: 24px;
+}
+
+.shuliang {
+	width: 15px;
+	padding-left: 15px;
+	height: 25px;
+}
+
+.c_prev,
+.c_next {
+	width: 25px;
+	height: 29px;
+	font-size: 18px;
+}
+
+.fuli {
+	display: block;
+	font-size: 14px;
+	border-radius: 5px 5px 5px 5px;
+	background: red;
+	width: 30px;
+	color: #fff;
+	float: left;
+	margin-right: 10px;
+}
+
+.song {
+	line-height: 24px;
+	font-size: 18px;
+}
+
+.lastest {
+	margin-bottom: 20px;
+}
+
+.jrgwc p {
+	display: block;
+	width: 250px;
+	height: 35px;
+	border-bottom: 2px solid #9A0900;
+	background: #E72418;
+	border-radius: 2px 2px 2px 2px;
+	color: #fff;
+	font-size: 28px;
+	font-weight: 400;
+	text-align: center;
+	line-height: 35px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
+/************************选择地址部分******************/
+.addrss{ margin-top: -15px;}

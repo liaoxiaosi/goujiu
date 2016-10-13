@@ -26,6 +26,8 @@
 				var opass = document.getElementById("pass1"); //密码
 				var oalert = document.getElementById('alert'); //提示
 
+				var olduser = getcookie("username");
+				var oldpass = getcookie("password");
 				if(olduser && oldpass) {
 					ouser.value = olduser;
 					opass.value = oldpass;
@@ -125,17 +127,21 @@
 					opass.value = oldpass;
 				}
 
-				//如果勾选了10天免登录，那么保存信息
-				if(ocheck.checked) {
+				osubmit.onclick = function() {
 
-					//设置cookie
-					var d = new Date;
-					d.setDate(d.getDate() + 10);
-					var cookietext = setcookie("username", ouser.value, d);
-					var cookietext = setcookie("password", opass.value, d);
+						//如果勾选了10天免登录，那么保存信息
 
-				}
-				//      邮箱注册
+						if(ocheck.checked) {
+
+							//设置cookie
+							var d = new Date;
+							d.setDate(d.getDate() + 10);
+							var cookietext = setcookie("username", ouser.value, d);
+							var cookietext = setcookie("password", opass.value, d);
+
+						}
+					}
+					//      邮箱注册
 				var ocheck2 = document.getElementById("check-old2");
 				var osubmit2 = document.getElementById("submit2");
 				var oreset2 = document.getElementById("reset2");
