@@ -6,7 +6,7 @@ $(function(){
 		var s_name=$('.xm_middle .p_shang').html();
 		var s_wz=$('.xm_middle .p_xia').text();
 		var s_price=$('.xm_middle .price').html();
-		var s_pic='../img/detail/p1.jpg';
+		var s_pic='../img/p1.jpg';
 		var s_sl=$('.xm_middle .shuliang').val();
 		var sval={};
 		sval.name=s_name;                
@@ -30,7 +30,7 @@ $(function(){
 				if(ele.split('=')[0].length>=5){
 					var ocookie=JSON.parse(ele.split('=')[1]);
 					//创建一个li
-					var $li='<li class="sp_name" data-goodsname="'+ele.split('=')[0]+'"><p class="left p1"><img src='+ocookie.pic+'/></p><a href="#" class="aa1">'+ocookie.name+'</a></span></p><p class="left p3">￥'+ocookie.price+'</p><p class="left p4">'+ocookie.sl+'</p><p class="left p5">￥'+ocookie.price*ocookie.sl+'</p><span class="delete">删除</span></li>';
+					var $li='<li class="sp_name" data-goodsname="'+ele.split('=')[0]+'"><p class="left p1"><img src='+ocookie.pic+'></p><a href="#" class="aa1">'+ocookie.name+'</a></span></p><p class="left p3">￥'+ocookie.price+'</p><p class="left p4">'+ocookie.sl+'</p><p class="left p5">￥'+ocookie.price*ocookie.sl+'</p><span class="delete">删除</span></li>';
 					$('.cheche ul').append($li);   //添加到ul
 					
 					//计算总价
@@ -66,7 +66,7 @@ $(function(){
 				if(ele.split('=')[0].length>=5){
 					var ocookie=JSON.parse(ele.split('=')[1]);
 					
-					var $li='<li class="sp_name" data-goodsname="'+ele.split('=')[0]+'"><p class="left p1"><img src='+ocookie.pic+'/></p><a href="#" class="aa1">'+ocookie.name+'</a></span></p><p class="left p3">￥'+ocookie.price+'</p><p class="left p4">'+ocookie.sl+'</p><p class="left p5">￥'+ocookie.price*ocookie.sl+'</p><span class="delete">删除</span></li>';
+					var $li='<li class="sp_name" data-goodsname="'+ele.split('=')[0]+'"><p class="left p1"><img src='+ocookie.pic+'></p><a href="#" class="aa1">'+ocookie.name+'</a></span></p><p class="left p3">￥'+ocookie.price+'</p><p class="left p4">'+ocookie.sl+'</p><p class="left p5">￥'+ocookie.price*ocookie.sl+'</p><span class="delete">删除</span></li>';
 					$('.cheche ul').append($li);
 					
 					$all+=ocookie.price*ocookie.sl;
